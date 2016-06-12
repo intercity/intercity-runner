@@ -1,0 +1,5 @@
+---
+- name: Create INTERCITY_HOST file
+  file: dest=/home/dokku/INTERCITY_HOST state=touch
+- name: Add INTERCITY_HOST data to file
+  lineinfile: dest=/home/dokku/INTERCITY_HOST line=ic.firmhouse.com

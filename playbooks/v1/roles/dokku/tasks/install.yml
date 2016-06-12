@@ -1,0 +1,21 @@
+---
+- name: Download dokku
+  become_method: sudo
+  become_user: root
+  get_url: url="https://raw.githubusercontent.com/dokku/dokku/{{ dokku_version }}/bootstrap.sh" dest=/tmp/bootstrap.sh
+
+- name: Configure dokku pre-install
+  become_method: sudo
+  become_user: root
+  command:
+    echo 'dokku dokku/web_config boolean false' | debconf-set-selections &&
+    echo 'dokku dokku/vhost_enable boolean false' | debconf-set-selections && 
+    echo 'dokku dokku/hostname string intercity.dokku' | debconf-set-selections && 
+    echo 'dokku dokku/skip_key_file boolean true' | debconf-set-selections
+
+- name: Install dokku
+  become_method: sudo
+  become_user: root
+  register: dokku_install
+  command: bash /tmp/bootstrap.sh DOKKU_TAG={{ dokku_version }}
+

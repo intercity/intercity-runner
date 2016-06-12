@@ -1,0 +1,5 @@
+---
+- name: Run dokku command
+  become_method: sudo
+  become_user: root
+  command: dokku {{ dokku_command }}
