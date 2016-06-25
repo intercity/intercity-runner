@@ -3,3 +3,4 @@
   become_method: sudo
   become_user: root
   command: dokku {{ dokku_command }}
+  register: run_command_output

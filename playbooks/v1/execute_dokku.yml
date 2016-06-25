@@ -5,3 +5,4 @@
   tasks:
     - include: roles/common/tasks/ensure_intercity_hostfile.yml
     - include: roles/dokku/tasks/run_command.yml
+    - debug: var=run_command_output.stdout_lines
